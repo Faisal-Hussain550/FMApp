@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import Image from "../assets/image.png";
 import Logo from "../assets/AdsellsLogo.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   // Show toast message
-  const showToast = (text, type) => {
+ const showToast = (text, type) => {
   const toast = document.getElementById("custom-toast");
   toast.innerText = text;
-  toast.style.backgroundColor = type === "success" ? "green" : "red";
+  toast.style.backgroundColor = type === "success" ? "#4CAF50" : "#f44336"; // green / red
+  toast.style.color = "white"; 
+  toast.style.fontWeight = "bold";
   toast.style.display = "block";
 
   setTimeout(() => {
@@ -27,7 +31,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("https://hrm.adsells.biz/FMAppApi/login ", {
+      const res = await fetch("https://hrm.adsells.biz/FMAppApi/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,16 +42,23 @@ const Login = () => {
         }),
       });
 
-      const data = await res.json();
-      console.log("Login Response:", data);
-
-      if (res.ok && data.success) {
-          localStorage.setItem("user", JSON.stringify(data));
-          showToast(`Welcome, ${username}! 🎉`, "success");
-      } else {
-          showToast(data.message || "Invalid username or password ❌", "error");
+      let data = {};
+      try {
+        // Safely parse JSON only if content exists
+        const text = await res.text();
+        data = text ? JSON.parse(text) : {};
+      } catch (err) {
+        console.warn("No valid JSON in response");
+        data = {};
       }
 
+      console.log("Login Response:", data);
+      if (res.ok && (data.message==="Login successful")) {
+    showToast(`Welcome, ${username}! 🎉`, "success");
+    navigate("/Home");
+} else {
+    showToast(data.message || "Invalid username or password ❌", "error");
+}
     } catch (error) {
       console.error(error);
       showToast("Server error. Please try again later.", "error");
@@ -111,7 +122,7 @@ const Login = () => {
           display: "none",
           position: "fixed",
           right: "20px",
-          bottom:"20px",
+          bottom: "20px",
           padding: "10px 20px",
           borderRadius: "5px",
           color: "white",
