@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/AdsellsLogo.png"; // adjust if path differs
+import logo from "../../assets/AdsellsLogo.png"; 
 
 const Footer = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);

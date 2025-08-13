@@ -1,4 +1,4 @@
-// src/components/Dashboard/Home.jsx
+
 import Footer from "./Footer";
 import Nav from "./Nav";
 
@@ -14,5 +14,6 @@ const Home = () => {
     </div>
   );
 };
+
 
 export default Home;

@@ -8,11 +8,10 @@ const Nav = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
 
-  // Watch window size to update mobile/desktop view
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth > 768) setMenuOpen(false); // close menu if switching to desktop
+      if (window.innerWidth > 768) setMenuOpen(false);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -26,27 +25,38 @@ const Nav = () => {
   const handleNavClick = (tabName) => {
     setActiveTab(tabName);
     setMenuOpen(false);
-    navigate(`/${tabName}`);
+    const route = tabName === "Dashboard" ? "/Home" : `/${tabName.toLowerCase()}`;
+    navigate(route);
   };
 
-  return (
-    <nav
+  // Desktop Sidebar Component
+  const DesktopSidebar = () => (
+    <div
       style={{
-        backgroundColor: "#ffffff",
-        borderBottom: "1px solid #e5e7eb",
-        padding: "0 16px",
-        height: "64px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
-        position: "sticky",
+        position: "fixed",
+        left: 0,
         top: 0,
-        zIndex: 1000,
+        height: "100vh",
+        width: "240px",
+        backgroundColor: "#ffffff",
+        borderRight: "1px solid #e5e7eb",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        paddingTop: "20px",
+        boxShadow: "2px 0 6px rgba(0,0,0,0.05)",
       }}
     >
       {/* Logo */}
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          padding: "0 16px",
+          cursor: "pointer",
+        }}
+        onClick={() => handleNavClick("Dashboard")}
+      >
         <img
           src={logo}
           alt="Logo"
@@ -56,112 +66,138 @@ const Nav = () => {
             borderRadius: "5px",
           }}
         />
+        <span style={{ fontWeight: "bold", fontSize: "18px", color: "#3b82f6" }}>
+          Adsells
+        </span>
       </div>
 
-      {/* Desktop Navigation */}
-      {!isMobile && (
-        <>
-          <ul
-            style={{
-              display: "flex",
-              listStyle: "none",
-              margin: 0,
-              padding: 0,
-              gap: "32px",
-              alignItems: "center",
-            }}
-          >
-            {["Dashboard", "Profile", "Reports", "Management"].map((tab) => (
-              <li key={tab}>
-                <span
-                  style={{
-                    color: activeTab === tab ? "#3b82f6" : "#6b7280",
-                    fontWeight: "500",
-                    fontSize: "14px",
-                    padding: "8px 0",
-                    borderBottom:
-                      activeTab === tab
-                        ? "2px solid #3b82f6"
-                        : "2px solid transparent",
-                    cursor: "pointer",
-                    transition: "all 0.2s ease-in-out",
-                  }}
-                  onClick={() => handleNavClick(tab)}
-                >
-                  {tab}
-                </span>
-              </li>
-            ))}
-          </ul>
-
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "16px",
-              marginLeft: "24px",
-              paddingLeft: "24px",
-              borderLeft: "1px solid #e5e7eb",
-            }}
-          >
+      {/* Navigation Links */}
+      <ul style={{ listStyle: "none", padding: "20px 0", margin: 0, flex: 1 }}>
+        {["Dashboard", "Profile", "Reports", "Management"].map((tab) => (
+          <li key={tab}>
             <div
               style={{
-                width: "32px",
-                height: "32px",
-                borderRadius: "50%",
-                backgroundColor: "#f3f4f6",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "14px",
-                  fontWeight: "500",
-                  color: "#6b7280",
-                }}
-              >
-                U
-              </span>
-            </div>
-
-            <button
-              style={{
-                background: "none",
-                border: "none",
-                color: "#6b7280",
+                padding: "12px 20px",
                 cursor: "pointer",
-                fontWeight: "500",
-                fontSize: "14px",
-                padding: "6px 12px",
+                fontWeight: activeTab === tab ? "600" : "500",
+                fontSize: "16px",
+                color: activeTab === tab ? "#3b82f6" : "#6b7280",
+                backgroundColor: activeTab === tab ? "rgba(59,130,246,0.1)" : "transparent",
                 borderRadius: "6px",
+                margin: "4px 12px",
                 transition: "all 0.2s ease-in-out",
               }}
-              onClick={handleLogout}
+              onClick={() => handleNavClick(tab)}
             >
-              Logout
-            </button>
-          </div>
-        </>
-      )}
+              {tab}
+            </div>
+          </li>
+        ))}
+      </ul>
 
-      {/* Mobile Menu Button */}
-      {isMobile && (
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
+      {/* Profile & Logout */}
+      <div style={{ padding: "16px" }}>
+        <div
           style={{
-            background: "none",
-            border: "none",
-            fontSize: "24px",
-            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            marginBottom: "12px",
           }}
         >
-          ☰
+          <div
+            style={{
+              width: "36px",
+              height: "36px",
+              borderRadius: "50%",
+              backgroundColor: "#f3f4f6",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontWeight: "500",
+              color: "#6b7280",
+            }}
+          >
+            U
+          </div>
+          <span style={{ fontWeight: "500", color: "#6b7280" }}>User</span>
+        </div>
+
+        <button
+          style={{
+            width: "100%",
+            padding: "10px 0",
+            backgroundColor: "#ef4444",
+            border: "none",
+            color: "#fff",
+            fontWeight: "500",
+            borderRadius: "6px",
+            cursor: "pointer",
+            transition: "all 0.2s ease-in-out",
+          }}
+          onClick={handleLogout}
+        >
+          Logout
         </button>
+      </div>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Desktop Sidebar */}
+      {!isMobile && <DesktopSidebar />}
+
+      {/* Mobile Top Bar */}
+      {isMobile && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "64px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0 16px",
+            backgroundColor: "#ffffff",
+            borderBottom: "1px solid #e5e7eb",
+            zIndex: 1000,
+            boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+          }}
+        >
+          {/* Logo on the left */}
+          <div
+            style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+            onClick={() => handleNavClick("Dashboard")}
+          >
+            <img
+              src={logo}
+              alt="Logo"
+              style={{ height: "40px", borderRadius: "5px" }}
+            />
+             <span style={{ fontWeight: "bold", fontSize: "18px", color: "#3b82f6" }}>
+                FMApp
+             </span>
+          </div>
+
+          {/* Hamburger menu on the right */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              background: "none",
+              border: "none",
+              fontSize: "24px",
+              cursor: "pointer",
+            }}
+          >
+            ☰
+          </button>
+        </div>
       )}
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Dropdown Menu (unchanged) */}
       {isMobile && menuOpen && (
         <div
           style={{
@@ -203,7 +239,7 @@ const Nav = () => {
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 };
 

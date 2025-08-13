@@ -12,22 +12,58 @@ const Login = () => {
   const navigate = useNavigate();
 
   // Show toast message
- const showToast = (text, type) => {
-  const toast = document.getElementById("custom-toast");
-  toast.innerText = text;
-  toast.style.backgroundColor = type === "success" ? "#4CAF50" : "#f44336"; // green / red
-  toast.style.color = "white"; 
-  toast.style.fontWeight = "bold";
-  toast.style.display = "block";
+  const showToast = (text, type) => {
+    const toast = document.getElementById("custom-toast");
+    toast.innerText = text;
+    toast.style.backgroundColor = type === "success" ? "#4CAF50" : "#f44336"; // green / red
+    toast.style.color = "white"; 
+    toast.style.fontWeight = "bold";
+    toast.style.display = "block";
 
-  setTimeout(() => {
-    toast.style.display = "none";
-  }, 3000);
-};
+    setTimeout(() => {
+      toast.style.display = "none";
+    }, 3000);
+  };
 
+  // Validation function
+  const validateForm = () => {
+    const usernameRegex = /^[a-zA-Z0-9._]+$/;               // letters, numbers, underscore, dot
+    const scriptTagRegex = /<script.*?>.*?<\/script>/i;     // script tag check
+
+    if (!username.trim() && !password.trim()) {
+      showToast("Please enter both username and password ❌", "error");
+      return false;
+    }
+
+    if (!username.trim()) {
+      showToast("Please enter username", "error");
+      return false;
+    }
+    if (!usernameRegex.test(username)) {
+      showToast("Username can only contain letters, numbers, underscores, and dots.", "error");
+      return false;
+    }
+    if (scriptTagRegex.test(username)) {
+      showToast("Script tags are not allowed in username.", "error");
+      return false;
+    }
+
+    if (!password.trim()) {
+      showToast("Please enter password", "error");
+      return false;
+    }
+    if (scriptTagRegex.test(password)) {
+      showToast("Script tags are not allowed in password.", "error");
+      return false;
+    }
+
+    return true;
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
+
     setLoading(true);
 
     try {
@@ -44,7 +80,6 @@ const Login = () => {
 
       let data = {};
       try {
-        // Safely parse JSON only if content exists
         const text = await res.text();
         data = text ? JSON.parse(text) : {};
       } catch (err) {
@@ -54,11 +89,11 @@ const Login = () => {
 
       console.log("Login Response:", data);
       if (res.ok && (data.message==="Login successful")) {
-    showToast(`Welcome, ${username}! 🎉`, "success");
-    navigate("/Home");
-} else {
-    showToast(data.message || "Invalid username or password ❌", "error");
-}
+        showToast(`Welcome, ${username}! 🎉`, "success");
+        navigate("/Home");
+      } else {
+        showToast(data.message || "Invalid username or password ❌", "error");
+      }
     } catch (error) {
       console.error(error);
       showToast("Server error. Please try again later.", "error");
@@ -97,10 +132,12 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  {showPassword ? (
-                    <FaEyeSlash onClick={() => setShowPassword(!showPassword)} />
-                  ) : (
-                    <FaEye onClick={() => setShowPassword(!showPassword)} />
+                  {password && (
+                    showPassword ? (
+                      <FaEyeSlash onClick={() => setShowPassword(false)} />
+                    ) : (
+                      <FaEye onClick={() => setShowPassword(true)} />
+                    )
                   )}
                 </div>
 
