@@ -89,6 +89,7 @@ const Login = () => {
 
       console.log("Login Response:", data);
       if (res.ok && (data.message==="Login successful")) {
+         localStorage.setItem("username", username);
         showToast(`Welcome, ${username}! 🎉`, "success");
         navigate("/Home");
       } else {

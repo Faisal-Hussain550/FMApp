@@ -5,10 +5,14 @@ import Nav from "./Nav";
 const Home = () => {
   return (
     <div>
+      
       <Nav />
       <div style={{ padding: "20px" }}>
-        <h1>Welcome to the Dashboard</h1>
-        <p>This is your home page.</p>
+   
+            <h1 className="flex items-center justify-center h-screen"flex items-center justify-center h-screen>Welcome to the Dashboard</h1>
+          
+    
+        
       </div>
        <Footer />
     </div>

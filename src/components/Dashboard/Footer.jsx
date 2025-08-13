@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/AdsellsLogo.png"; 
+import logo from "../../assets/AdsellsLogo.png";
 
 const Footer = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -22,7 +22,7 @@ const Footer = () => {
         borderTop: "1px solid #e5e7eb",
         position: "fixed",
         bottom: 0,
-        left: 0,
+        left: isMobile ? 0 : "240px", // Push right to account for sidebar
         right: 0,
         zIndex: 100,
       }}
@@ -73,7 +73,7 @@ const Footer = () => {
                   margin: 0,
                 }}
               >
-                FMAPP 
+                FMAPP
               </h3>
             </div>
             {!isMobile && (

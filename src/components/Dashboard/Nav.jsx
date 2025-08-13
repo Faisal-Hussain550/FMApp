@@ -6,6 +6,7 @@ const Nav = () => {
   const [activeTab, setActiveTab] = useState("Dashboard");
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,11 +15,18 @@ const Nav = () => {
       if (window.innerWidth > 768) setMenuOpen(false);
     };
     window.addEventListener("resize", handleResize);
+
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("username");
     navigate("/");
   };
 
@@ -82,7 +90,8 @@ const Nav = () => {
                 fontWeight: activeTab === tab ? "600" : "500",
                 fontSize: "16px",
                 color: activeTab === tab ? "#3b82f6" : "#6b7280",
-                backgroundColor: activeTab === tab ? "rgba(59,130,246,0.1)" : "transparent",
+                backgroundColor:
+                  activeTab === tab ? "rgba(59,130,246,0.1)" : "transparent",
                 borderRadius: "6px",
                 margin: "4px 12px",
                 transition: "all 0.2s ease-in-out",
@@ -118,9 +127,11 @@ const Nav = () => {
               color: "#6b7280",
             }}
           >
-            U
+            {username ? username.charAt(0).toUpperCase() : "U"}
           </div>
-          <span style={{ fontWeight: "500", color: "#6b7280" }}>User</span>
+          <span style={{ fontWeight: "500", color: "#6b7280" }}>
+            {username || "User"}
+          </span>
         </div>
 
         <button
@@ -177,9 +188,16 @@ const Nav = () => {
               alt="Logo"
               style={{ height: "40px", borderRadius: "5px" }}
             />
-             <span style={{ fontWeight: "bold", fontSize: "18px", color: "#3b82f6" }}>
-                FMApp
-             </span>
+            <span
+              style={{
+                fontWeight: "bold",
+                fontSize: "18px",
+                color: "#3b82f6",
+                marginLeft: "8px",
+              }}
+            >
+              FMApp
+            </span>
           </div>
 
           {/* Hamburger menu on the right */}
@@ -197,7 +215,7 @@ const Nav = () => {
         </div>
       )}
 
-      {/* Mobile Dropdown Menu (unchanged) */}
+      {/* Mobile Dropdown Menu (unchanged except username above logout) */}
       {isMobile && menuOpen && (
         <div
           style={{
@@ -226,6 +244,39 @@ const Nav = () => {
               {tab}
             </div>
           ))}
+
+          {/* Username + Icon */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
+              marginTop: "12px",
+              paddingTop: "12px",
+              borderTop: "1px solid #eee",
+            }}
+          >
+            <div
+              style={{
+                width: "36px",
+                height: "36px",
+                borderRadius: "50%",
+                backgroundColor: "#f3f4f6",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontWeight: "500",
+                color: "#6b7280",
+              }}
+            >
+              {username ? username.charAt(0).toUpperCase() : "U"}
+            </div>
+            <span style={{ fontWeight: "500", color: "#6b7280" }}>
+              {username || "User"}
+            </span>
+          </div>
+
+          {/* Logout */}
           <div
             style={{
               padding: "12px 0",
