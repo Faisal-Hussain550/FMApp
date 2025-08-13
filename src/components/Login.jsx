@@ -3,6 +3,8 @@ import Image from "../assets/image.png";
 import Logo from "../assets/AdsellsLogo.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -61,48 +63,48 @@ const Login = () => {
   };
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    if (!validateForm()) return;
+  e.preventDefault();
+  if (!validateForm()) return;
 
-    setLoading(true);
+  setLoading(true);
 
-    try {
-      const res = await fetch("https://hrm.adsells.biz/FMAppApi/login", {
-        method: "POST",
+  try {
+    const res = await axios.post(
+      "https://hrm.adsells.biz/FMAppApi/login",
+      {
+        Username: username,
+        Password: password,
+      },
+      {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          Username: username,
-          Password: password,
-        }),
-      });
-
-      let data = {};
-      try {
-        const text = await res.text();
-        data = text ? JSON.parse(text) : {};
-      } catch (err) {
-        console.warn("No valid JSON in response");
-        data = {};
       }
+    );
 
-      console.log("Login Response:", data);
-      if (res.ok && (data.message==="Login successful")) {
-         localStorage.setItem("username", username);
-        showToast(`Welcome, ${username}! 🎉`, "success");
-        navigate("/Home");
-      } else {
-        showToast(data.message || "Invalid username or password ❌", "error");
-      }
-    } catch (error) {
-      console.error(error);
+    const data = res.data || {};
+    console.log("Login Response:", data);
+
+    if (res.status === 200 && data.message === "Login successful") {
+      localStorage.setItem("username", username);
+      showToast(`Welcome, ${username}! 🎉`, "success");
+      navigate("/Home");
+    } else {
+      showToast(data.message || "Invalid username or password ❌", "error");
+    }
+  } catch (error) {
+    console.error(error);
+    if (error.response) {
+      // Server responded with an error status
+      showToast(error.response.data?.message || "Invalid username or password ❌", "error");
+    } else {
+      // Network error or no response
       showToast("Server error. Please try again later.", "error");
     }
+  }
 
-    setLoading(false);
-  };
-
+  setLoading(false);
+};
   return (
     <>
       <div className="login-main">
