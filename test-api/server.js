@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 const users = [
   { username: "testuser", password: "123456" },
   { username: "faisal", password: "password" },
-  {username:"Admin",password:"1234"}
+   { username: "admin", password: "1234" }
 ];
 
 // Login API

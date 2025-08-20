@@ -4,21 +4,23 @@ import Logo from "../assets/AdsellsLogo.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { useAuth } from "./Context/AuthContext";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
+  const { login } = useAuth(); //  use login from context
 
   // Show toast message
   const showToast = (text, type) => {
     const toast = document.getElementById("custom-toast");
     toast.innerText = text;
-    toast.style.backgroundColor = type === "success" ? "#4CAF50" : "#f44336"; // green / red
-    toast.style.color = "white"; 
+    toast.style.backgroundColor = type === "success" ? "#4CAF50" : "#f44336";
+    toast.style.color = "white";
     toast.style.fontWeight = "bold";
     toast.style.display = "block";
 
@@ -29,27 +31,28 @@ const Login = () => {
 
   // Validation function
   const validateForm = () => {
-    const usernameRegex = /^[a-zA-Z0-9._]+$/;               // letters, numbers, underscore, dot
-    const scriptTagRegex = /<script.*?>.*?<\/script>/i;     // script tag check
+    const usernameRegex = /^[a-zA-Z0-9._]+$/;
+    const scriptTagRegex = /<script.*?>.*?<\/script>/i;
 
     if (!username.trim() && !password.trim()) {
       showToast("Please enter both username and password ❌", "error");
       return false;
     }
-
     if (!username.trim()) {
       showToast("Please enter username", "error");
       return false;
     }
     if (!usernameRegex.test(username)) {
-      showToast("Username can only contain letters, numbers, underscores, and dots.", "error");
+      showToast(
+        "Username can only contain letters, numbers, underscores, and dots.",
+        "error"
+      );
       return false;
     }
     if (scriptTagRegex.test(username)) {
       showToast("Script tags are not allowed in username.", "error");
       return false;
     }
-
     if (!password.trim()) {
       showToast("Please enter password", "error");
       return false;
@@ -63,48 +66,70 @@ const Login = () => {
   };
 
   const handleLogin = async (e) => {
-  e.preventDefault();
-  if (!validateForm()) return;
+    e.preventDefault();
+    if (!validateForm()) return;
 
-  setLoading(true);
+    setLoading(true);
 
-  try {
-    const res = await axios.post(
-      "https://hrm.adsells.biz/FMAppApi/login",
-      {
-        Username: username,
-        Password: password,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
+    try {
+      const res = await axios.post(
+        "https://localhost:7033/api/login",
+        {
+          Username: username,
+          Password: password,
         },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = res.data || {};
+      console.log("Login Response:", data);
+
+      if (res.status === 200 && data.message.includes("successful")) {
+        // ✅ Use context login instead of localStorage directly
+        login(username, data.role, data.token);
+
+        showToast(`Welcome, ${username}! 🎉`, "success");
+
+        // ✅ Role-based redirection
+        switch (data.role) {
+          case "Admin":
+            navigate("/admin");
+            break;
+          case "Manager":
+            navigate("/manager");
+            break;
+          case "Supervisor":
+            navigate("/supervisor");
+            break;
+          case "Employee":
+            navigate("/employee");
+            break;
+          default:
+            navigate("/"); // fallback
+            break;
+        }
+      } else {
+        showToast(data.message || "Invalid username or password ❌", "error");
       }
-    );
-
-    const data = res.data || {};
-    console.log("Login Response:", data);
-
-    if (res.status === 200 && data.message === "Login successful") {
-      localStorage.setItem("username", username);
-      showToast(`Welcome, ${username}! 🎉`, "success");
-      navigate("/Home");
-    } else {
-      showToast(data.message || "Invalid username or password ❌", "error");
+    } catch (error) {
+      console.error(error);
+      if (error.response) {
+        showToast(
+          error.response.data?.message || "Invalid username or password ❌",
+          "error"
+        );
+      } else {
+        showToast("Server error. Please try again later.", "error");
+      }
     }
-  } catch (error) {
-    console.error(error);
-    if (error.response) {
-      // Server responded with an error status
-      showToast(error.response.data?.message || "Invalid username or password ❌", "error");
-    } else {
-      // Network error or no response
-      showToast("Server error. Please try again later.", "error");
-    }
-  }
 
-  setLoading(false);
-};
+    setLoading(false);
+  };
+
   return (
     <>
       <div className="login-main">
@@ -135,13 +160,12 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  {password && (
-                    showPassword ? (
+                  {password &&
+                    (showPassword ? (
                       <FaEyeSlash onClick={() => setShowPassword(false)} />
                     ) : (
                       <FaEye onClick={() => setShowPassword(true)} />
-                    )
-                  )}
+                    ))}
                 </div>
 
                 <div className="login-center-buttons">
