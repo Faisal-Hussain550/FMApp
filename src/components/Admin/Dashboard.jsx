@@ -1,9 +1,9 @@
 import React from "react";
-import Nav from "../Dashboard/Nav";
-import Footer from "../Dashboard/Footer";
-import AdminHome from "./AdminHome"; 
+
+import AdminHome from "./AdminHome";
 import { useAuth } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import "./styles.css";
 
 const AdminDashboard = () => {
   const { auth, logout } = useAuth();
@@ -18,11 +18,11 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex h-screen">
-      <Nav role={auth.role} onLogout={logout} />
+   
       <main className="flex-1 p-6 bg-gray-100 overflow-auto">
         <AdminHome />
       </main>
-      <Footer />
+        
     </div>
   );
 };

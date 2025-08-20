@@ -1,103 +1,110 @@
-// Components/Admin/AdminHome.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth } from "../Context/AuthContext";
-const AdminHome = () => {
+import Sidebar from "./Sidebar";
+import Header from "./Header";
+import StatsCard from "./StatsCard";
+import Charts from "./Charts";
+import RecentIssues from "./RecentIssues";
+import { FaExclamationTriangle, FaClock, FaChartLine, FaCheck } from "react-icons/fa";
+import { useAuth } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import "./styles.css";
+
+const Dashboard = () => {
   const { auth } = useAuth();
-  const [issues, setIssues] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  const [data, setData] = useState({
+    total: 0,
+    pending: 0,
+    progress: 0,
+    resolved: 0,
+    priority: [],
+    department: [],
+    recent: []
+  });
 
   useEffect(() => {
-    const fetchIssues = async () => {
+    if (!auth?.token) {
+      navigate("/"); // redirect if not logged in
+      return;
+    }
+
+    const fetchData = async () => {
       try {
-        const res = await axios.get("https://localhost:7033/api/issues", {
-          headers: { Authorization: `Bearer ${auth.token}` },
+        // 🔹 Call all APIs
+        const [allRes, createRes, assignRes, approveRes] = await Promise.all([
+          axios.get("https://localhost:7033/api/issues"),
+          axios.get("https://localhost:7033/api/issues/create"),
+          axios.get("https://localhost:7033/api/issues/assign"),
+          axios.get("https://localhost:7033/api/issues/approve"),
+        ]);
+
+        const allIssues = allRes.data || [];
+        const created = createRes.data || [];
+        const assigned = assignRes.data || [];
+        const approved = approveRes.data || [];
+
+        // 🔹 Priority breakdown
+        const priorityCount = allIssues.reduce((acc, issue) => {
+          acc[issue.priority] = (acc[issue.priority] || 0) + 1;
+          return acc;
+        }, {});
+        const priorityData = Object.entries(priorityCount).map(([name, value]) => ({
+          name,
+          value,
+        }));
+
+        // 🔹 Department breakdown
+        const deptCount = allIssues.reduce((acc, issue) => {
+          acc[issue.department] = (acc[issue.department] || 0) + 1;
+          return acc;
+        }, {});
+        const departmentData = Object.entries(deptCount).map(([name, value]) => ({
+          name,
+          value,
+        }));
+
+        // 🔹 Final dashboard state
+        setData({
+          total: allIssues.length,
+          pending: created.length,
+          progress: assigned.length,
+          resolved: approved.length,
+          priority: priorityData,
+          department: departmentData,
+          recent: allIssues
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // latest first
+            .slice(0, 5), // top 5 recent
         });
-        setIssues(res.data);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching dashboard data:", error);
       }
     };
-    fetchIssues();
-  }, [auth.token]);
 
-  const handleAction = async (issueId, action) => {
-    try {
-      if (action === "assign") {
-        // Example: assign to employee ID 2
-        await axios.post(
-          `https://localhost:7033/api/issues/assign`,
-          { IssueId: issueId, EmployeeId: 2 },
-          { headers: { Authorization: `Bearer ${auth.token}` } }
-        );
-      } else if (action === "approve") {
-        await axios.post(
-          `https://localhost:7033/api/issues/approve`,
-          { IssueId: issueId, ApprovedById: 1 }, // Admin ID
-          { headers: { Authorization: `Bearer ${auth.token}` } }
-        );
-      }
-      // Reload issues
-      const res = await axios.get("https://localhost:7033/api/issues", {
-        headers: { Authorization: `Bearer ${auth.token}` },
-      });
-      setIssues(res.data);
-    } catch (err) {
-      console.error(err);
-      alert("Action failed");
-    }
-  };
-
-  if (loading) return <p>Loading issues...</p>;
+    fetchData();
+  }, [auth, navigate]);
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+    <div className="dashboard-container">
+      <Sidebar />
+      <main className="main">
+        <Header />
+        <div className="stats-cards">
+          <StatsCard title="Total Issues" value={data.total} change="+12% from last month" icon={<FaExclamationTriangle />} color="#60a5fa" />
+          <StatsCard title="Pending Issues" value={data.pending} change="-8% from last month" icon={<FaClock />} color="#fbbf24" />
+          <StatsCard title="In Progress" value={data.progress} change="+15% from last month" icon={<FaChartLine />} color="#a78bfa" />
+          <StatsCard title="Resolved" value={data.resolved} change="+23% from last month" icon={<FaCheck />} color="#34d399" />
+        </div>
 
-      <table className="min-w-full bg-white shadow rounded">
-        <thead>
-          <tr>
-            <th className="px-4 py-2 border">Title</th>
-            <th className="px-4 py-2 border">Status</th>
-            <th className="px-4 py-2 border">Priority</th>
-            <th className="px-4 py-2 border">Department</th>
-            <th className="px-4 py-2 border">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {issues.map((issue) => (
-            <tr key={issue.issue_Id}>
-              <td className="px-4 py-2 border">{issue.title}</td>
-              <td className="px-4 py-2 border">{issue.status}</td>
-              <td className="px-4 py-2 border">{issue.priority}</td>
-              <td className="px-4 py-2 border">{issue.department}</td>
-              <td className="px-4 py-2 border flex gap-2">
-                {issue.status === "Pending" && (
-                  <button
-                    className="bg-blue-500 text-white px-2 py-1 rounded"
-                    onClick={() => handleAction(issue.issue_Id, "assign")}
-                  >
-                    Assign
-                  </button>
-                )}
-                {issue.status === "Resolved" && (
-                  <button
-                    className="bg-green-500 text-white px-2 py-1 rounded"
-                    onClick={() => handleAction(issue.issue_Id, "approve")}
-                  >
-                    Approve
-                  </button>
-                )}
-                {/* Add more buttons like Reject if needed */}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        {/* 🔹 Pass chart data */}
+        <Charts priorityData={data.priority} departmentData={data.department} />
+
+        {/* 🔹 Show recent issues */}
+        <RecentIssues issues={data.recent} />
+      </main>
     </div>
   );
 };
 
-export default AdminHome;
+export default Dashboard;

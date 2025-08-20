@@ -1,0 +1,6 @@
+@FMAppApi_HostAddress = http://localhost:5275
+
+GET {{FMAppApi_HostAddress}}/LoginRequest/
+Accept: application/json
+
+###
