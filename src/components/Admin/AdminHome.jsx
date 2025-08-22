@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Sidebar from "./Sidebar";
+
 import Header from "./Header";
-import StatsCard from "./StatsCard";
+import StatsCard from "../Common/StatsCard";
 import Charts from "./Charts";
-import RecentIssues from "./RecentIssues";
+import RecentIssues from "../Common/RecentIssues";
 import { FaExclamationTriangle, FaClock, FaChartLine, FaCheck } from "react-icons/fa";
-import { useAuth } from "../../Context/AuthContext";
+import { useAuth } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 
@@ -21,7 +21,7 @@ const Dashboard = () => {
     resolved: 0,
     priority: [],
     department: [],
-    recent: []
+    recent: [],
   });
 
   useEffect(() => {
@@ -32,53 +32,54 @@ const Dashboard = () => {
 
     const fetchData = async () => {
       try {
-        // 🔹 Call all APIs
-        const [allRes, createRes, assignRes, approveRes] = await Promise.all([
-          axios.get("https://localhost:7033/api/issues"),
-          axios.get("https://localhost:7033/api/issues/create"),
-          axios.get("https://localhost:7033/api/issues/assign"),
-          axios.get("https://localhost:7033/api/issues/approve"),
-        ]);
+        const res = await axios.get(
+          "https://localhost:7033/api/issues/all",
+          {
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            },
+          }
+        );
 
-        const allIssues = allRes.data || [];
-        const created = createRes.data || [];
-        const assigned = assignRes.data || [];
-        const approved = approveRes.data || [];
+        const allIssues = res.data.data || [];
 
-        // 🔹 Priority breakdown
+        // Priority breakdown
         const priorityCount = allIssues.reduce((acc, issue) => {
-          acc[issue.priority] = (acc[issue.priority] || 0) + 1;
+          const priority = issue.priority || issue.Priority;
+          if (priority) acc[priority] = (acc[priority] || 0) + 1;
           return acc;
         }, {});
-        const priorityData = Object.entries(priorityCount).map(([name, value]) => ({
-          name,
-          value,
-        }));
+        const priorityData = Object.entries(priorityCount).map(([name, value]) => ({ name, value }));
 
-        // 🔹 Department breakdown
+        // Department breakdown
         const deptCount = allIssues.reduce((acc, issue) => {
-          acc[issue.department] = (acc[issue.department] || 0) + 1;
+          const dept = issue.department || issue.Department;
+          if (dept) acc[dept] = (acc[dept] || 0) + 1;
           return acc;
         }, {});
-        const departmentData = Object.entries(deptCount).map(([name, value]) => ({
-          name,
-          value,
-        }));
+        const departmentData = Object.entries(deptCount).map(([name, value]) => ({ name, value }));
 
-        // 🔹 Final dashboard state
+        // Recent issues (latest 5)
+        const recentIssues = [...allIssues]
+          .sort((a, b) => new Date(b.createdAt || b.CreatedAt) - new Date(a.createdAt || a.CreatedAt))
+          .slice(0, 5);
+
+        // Status counts
+        const pending = allIssues.filter(issue => (issue.status || issue.Status) === "Pending").length;
+        const progress = allIssues.filter(issue => (issue.status || issue.Status) === "InProgress").length;
+        const resolved = allIssues.filter(issue => (issue.status || issue.Status) === "Resolved").length;
+
         setData({
           total: allIssues.length,
-          pending: created.length,
-          progress: assigned.length,
-          resolved: approved.length,
+          pending,
+          progress,
+          resolved,
           priority: priorityData,
           department: departmentData,
-          recent: allIssues
-            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // latest first
-            .slice(0, 5), // top 5 recent
+          recent: recentIssues,
         });
       } catch (error) {
-        console.error("Error fetching dashboard data:", error);
+        console.error("❌ Error fetching dashboard data:", error);
       }
     };
 
@@ -87,20 +88,42 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <Sidebar />
+     
       <main className="main">
         <Header />
         <div className="stats-cards">
-          <StatsCard title="Total Issues" value={data.total} change="+12% from last month" icon={<FaExclamationTriangle />} color="#60a5fa" />
-          <StatsCard title="Pending Issues" value={data.pending} change="-8% from last month" icon={<FaClock />} color="#fbbf24" />
-          <StatsCard title="In Progress" value={data.progress} change="+15% from last month" icon={<FaChartLine />} color="#a78bfa" />
-          <StatsCard title="Resolved" value={data.resolved} change="+23% from last month" icon={<FaCheck />} color="#34d399" />
+          <StatsCard
+            title="Total Issues"
+            value={data.total}
+            change="+12% from last month"
+            icon={<FaExclamationTriangle />}
+            color="#60a5fa"
+          />
+          <StatsCard
+            title="Pending Issues"
+            value={data.pending}
+            change="-8% from last month"
+            icon={<FaClock />}
+            color="#fbbf24"
+          />
+          <StatsCard
+            title="In Progress"
+            value={data.progress}
+            change="+15% from last month"
+            icon={<FaChartLine />}
+            color="#a78bfa"
+          />
+          <StatsCard
+            title="Resolved"
+            value={data.resolved}
+            change="+23% from last month"
+            icon={<FaCheck />}
+            color="#34d399"
+          />
         </div>
 
-        {/* 🔹 Pass chart data */}
         <Charts priorityData={data.priority} departmentData={data.department} />
 
-        {/* 🔹 Show recent issues */}
         <RecentIssues issues={data.recent} />
       </main>
     </div>

@@ -1,4 +1,5 @@
 import { FaBell, FaUserCircle } from "react-icons/fa";
+import { useAuth } from "../Context/AuthContext";
 
 const Header = () => {
   return (
