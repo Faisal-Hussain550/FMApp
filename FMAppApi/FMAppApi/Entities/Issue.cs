@@ -4,12 +4,13 @@
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string Status { get; set; } = "Open";
-    public string City { get; set; } = string.Empty; // ✅ No longer nullable
-    public int CreatedById { get; set; }
-    public string Department { get; set; } = string.Empty;
+    public DateTime? CreateDate { get; set; } = DateTime.UtcNow;
+    public int CreateBy { get; set; }
+    public int AssignToDept { get; set; }
+    public int? AssignedDeptManger { get; set; }
     public string Priority { get; set; } = "Medium";
-    public int? AssignedToId { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public int? AssignDeptEmp { get; set; }
+    public DateTime? AsgnDeptEmpDate { get; set; }
 
     // Navigation
     public ICollection<IssueHistory>? Histories { get; set; }

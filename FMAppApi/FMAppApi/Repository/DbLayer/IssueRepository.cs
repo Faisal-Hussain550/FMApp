@@ -22,9 +22,12 @@ public class IssueRepository : IIssueRepository
 
         // Insert Issue
         var sql = @"
-            INSERT INTO Issues (Title, Description, Status, CreatedById, Department, Priority, AssignedToId, CreatedAt)
-            OUTPUT INSERTED.*
-            VALUES (@Title, @Description, 'Open', @CreatedById, @Department, @Priority, @AssignedToId, @CreatedAt)";
+            INSERT INTO Issues
+    (Title, Description, Status, CreateDate, CreateBy, AssignToDept, AssignedDeptManger, Priority, AssignDeptEmp, AsgnDeptEmpDate)
+OUTPUT INSERTED.*
+VALUES
+    (@Title, @Description, 'Open', @CreateDate, @CreateBy, @AssignToDept, @AssignedDeptManger, @Priority, @AssignDeptEmp, @AsgnDeptEmpDate);
+";
 
         var issue = await _db.QuerySingleAsync<Issue>(sql, new
         {
@@ -159,4 +162,14 @@ public class IssueRepository : IIssueRepository
             PageSize = filter.PageSize
         };
     }
+
+    public async Task<List<Issue>> GetAllIssuesAsync()
+{
+    var baseSql = "SELECT * FROM Issues WHERE 1=1";
+    var parameters = new DynamicParameters();
+
+    var result = await _db.QueryAsync<Issue>(baseSql, parameters);
+    return result.ToList();  // convert IEnumerable to List
+}
+
 }

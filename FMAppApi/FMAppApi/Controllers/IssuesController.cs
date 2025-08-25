@@ -4,6 +4,7 @@ using FMAppApi.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -18,6 +19,8 @@ public class IssuesController : ControllerBase
        
         
     }
+   
+
 
     // Employee creates issue
     [HttpPost("create")]
@@ -33,8 +36,14 @@ public class IssuesController : ControllerBase
         var issue = await _issueRepo.CreateIssueAsync(dto, userId);
         return Ok(new { message = "Issue created ✅", issueId = issue.Issue_Id });
     }
+    [HttpGet("manager")]
+    [Authorize(Roles = "Manager")]
+    public async Task<IActionResult> GetAllIssuesManager()
+    {
+        var data = await _issueRepo.GetAllIssuesAsync();
+        return Ok(data);   // wrap in IActionResult
+    }
 
-    // Supervisor assigns issue to employee
     [HttpPost("assign")]
     [Authorize(Roles = "Supervisor")]
     public async Task<IActionResult> AssignIssue([FromBody] AssignIssueDto dto)
