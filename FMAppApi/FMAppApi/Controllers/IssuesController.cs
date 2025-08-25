@@ -33,17 +33,11 @@ public class IssuesController : ControllerBase
         var issue = await _issueRepo.CreateIssueAsync(dto, userId);
         return Ok(new { message = "Issue created ✅", issueId = issue.Issue_Id });
     }
-    //Get All Issues
-    [Authorize(Roles = "Manager")]
-    public async Task<List<Issue>> GetAllIssuesManager()
-    {
-        var data = await _issueRepo.GetAllIssuesAsync();
-        var filtered = data.Where(x => x.AssignDeptEmp == null).ToList();
-        return filtered;
-    }
+
+    // Supervisor assigns issue to employee
     [HttpPost("assign")]
     [Authorize(Roles = "Supervisor")]
-    public async Task<IActionResult> AssignIssueToEmp([FromBody] AssignIssueDto dto)
+    public async Task<IActionResult> AssignIssue([FromBody] AssignIssueDto dto)
     {
         await _issueRepo.AssignIssueAsync(dto);
         return Ok(new { message = "Issue assigned to employee 🚀" });

@@ -3,7 +3,6 @@ using FMAppApi.Dtos.Common;
 using FMAppApi.Dtos.Issues;
 using FMAppApi.Entities;
 using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 using System.Data;
 
 public class IssueRepository : IIssueRepository
@@ -23,10 +22,10 @@ public class IssueRepository : IIssueRepository
 
         // Insert Issue
         var sql = @"
-           INSERT INTO Issues
-                (Title, Description, Status, CreateDate, CreateBy, AssignToDept, AssignedDeptManger, Priority)
+            INSERT INTO Issues (Title, Description, Status, CreatedById, Department, Priority, AssignedToId, CreatedAt)
             OUTPUT INSERTED.*
-            VALUES  (@Title, @Description, 'Open', @CreateDate, @CreateBy, @AssignToDept, @AssignedDeptManger, @Priority); ";
+            VALUES (@Title, @Description, 'Open', @CreatedById, @Department, @Priority, @AssignedToId, @CreatedAt)";
+
         var issue = await _db.QuerySingleAsync<Issue>(sql, new
         {
             dto.Title,
@@ -43,6 +42,7 @@ public class IssueRepository : IIssueRepository
         {
             await UploadIssueImagesAsync(issue.Issue_Id, dto.Images);
         }
+
         return issue;
     }
 
@@ -159,15 +159,4 @@ public class IssueRepository : IIssueRepository
             PageSize = filter.PageSize
         };
     }
-
-
-    public async Task<List<Issue>> GetAllIssuesAsync()
-    {
-        var baseSql = "SELECT * FROM Issues WHERE 1=1";
-        var parameters = new DynamicParameters();
-        var result = await _db.QueryAsync<Issue>(baseSql, parameters);
-        return result.ToList();  // convert IEnumerable to List
-    }
-
-
 }
