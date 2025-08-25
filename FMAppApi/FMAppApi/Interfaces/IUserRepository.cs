@@ -7,5 +7,6 @@ namespace FMAppApi.Interfaces
         Task<User?> GetUserByCredentialsAsync(string username, string password);
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<int> AddUserAsync(User user);
+        Task<bool> DeleteUserAsync(int id);
     }
 }

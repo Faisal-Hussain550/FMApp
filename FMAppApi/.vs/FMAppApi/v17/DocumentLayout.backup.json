@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "G:\\FMAppApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\entities\\issuehistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\entities\\issuehistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\repository\\dblayer\\issuerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\repository\\dblayer\\issuerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\repository\\dblayer\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\repository\\dblayer\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\entities\\issue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,44 +35,56 @@
       "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\controllers\\issuescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\dtos\\issues\\approveissuedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\dtos\\issues\\approveissuedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\repository\\dblayer\\issuerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\repository\\dblayer\\issuerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\interfaces\\iissuerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\interfaces\\iissuerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\repository\\dblayer\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\repository\\dblayer\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\dtos\\issues\\createissuedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\dtos\\issues\\createissuedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\entities\\issueimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\entities\\issueimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\repository\\dblayer\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\repository\\dblayer\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\controllers\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\controllers\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\dtos\\issues\\assignissuedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\dtos\\issues\\assignissuedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\dtos\\common\\pagedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\dtos\\common\\pagedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\dtos\\issues\\issuefilterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\dtos\\issues\\issuefilterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\controllers\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\controllers\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\entities\\issuehistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\entities\\issuehistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\entities\\issuefilterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\entities\\issuefilterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\dtos\\issues\\approveissuedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\dtos\\issues\\approveissuedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|g:\\fmappapi\\fmappapi\\entities\\issueimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540A59E-3969-404D-BB54-0A1E89B2E208}|FMAppApi\\FMAppApi.csproj|solutionrelative:fmappapi\\entities\\issueimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,37 +94,38 @@
       "DocumentGroups": [
         {
           "DockedHeight": 1234,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "FMAppApi\\Data\\ApplicationDbContext.cs",
               "ToolTip": "G:\\FMAppApi\\FMAppApi\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "FMAppApi\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAALAAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAA0AAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-15T09:53:04.251Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Program.cs",
               "RelativeDocumentMoniker": "FMAppApi\\Program.cs",
               "ToolTip": "G:\\FMAppApi\\FMAppApi\\Program.cs",
               "RelativeToolTip": "FMAppApi\\Program.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAgwDQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-13T12:53:40.703Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "LoginDto.cs",
               "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Controllers\\LoginDto.cs",
               "RelativeDocumentMoniker": "FMAppApi\\Controllers\\LoginDto.cs",
@@ -109,31 +138,200 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IssueRepository.cs",
-              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Repository\\DbLayer\\IssueRepository.cs",
-              "RelativeDocumentMoniker": "FMAppApi\\Repository\\DbLayer\\IssueRepository.cs",
-              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Repository\\DbLayer\\IssueRepository.cs",
-              "RelativeToolTip": "FMAppApi\\Repository\\DbLayer\\IssueRepository.cs",
-              "ViewState": "AgIAAIcAAAAAAAAAAAAqwEsAAAAOAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Repository\\DbLayer\\UserRepository.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\Repository\\DbLayer\\UserRepository.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Repository\\DbLayer\\UserRepository.cs",
+              "RelativeToolTip": "FMAppApi\\Repository\\DbLayer\\UserRepository.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAADwvy4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T10:28:22.104Z"
+              "WhenOpened": "2025-08-22T04:29:15.632Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
+              "Title": "User.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\Entities\\User.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Entities\\User.cs",
+              "RelativeToolTip": "FMAppApi\\Entities\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T04:20:24.435Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Issue.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Entities\\Issue.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\Entities\\Issue.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Entities\\Issue.cs",
+              "RelativeToolTip": "FMAppApi\\Entities\\Issue.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T10:18:33.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CreateIssueDto.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\DTOs\\Issues\\CreateIssueDto.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\DTOs\\Issues\\CreateIssueDto.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\DTOs\\Issues\\CreateIssueDto.cs",
+              "RelativeToolTip": "FMAppApi\\DTOs\\Issues\\CreateIssueDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T07:46:04.852Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "IIssueRepository.cs",
               "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Interfaces\\IIssueRepository.cs",
               "RelativeDocumentMoniker": "FMAppApi\\Interfaces\\IIssueRepository.cs",
               "ToolTip": "G:\\FMAppApi\\FMAppApi\\Interfaces\\IIssueRepository.cs",
               "RelativeToolTip": "FMAppApi\\Interfaces\\IIssueRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABDAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAhwBAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-18T10:27:29.417Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\Controllers\\LoginController.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "FMAppApi\\Controllers\\LoginController.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAowEUAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T07:17:46.468Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Interfaces\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\Interfaces\\IUserRepository.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Interfaces\\IUserRepository.cs",
+              "RelativeToolTip": "FMAppApi\\Interfaces\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T06:06:35.125Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\Controllers\\UsersController.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "FMAppApi\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAADwvzQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T04:27:26.218Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IssuesController.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Controllers\\IssuesController.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\Controllers\\IssuesController.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Controllers\\IssuesController.cs",
+              "RelativeToolTip": "FMAppApi\\Controllers\\IssuesController.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAAwHMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T10:35:41.91Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Repository\\DbLayer\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\Repository\\DbLayer\\AppDbContext.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Repository\\DbLayer\\AppDbContext.cs",
+              "RelativeToolTip": "FMAppApi\\Repository\\DbLayer\\AppDbContext.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T11:33:29.959Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AssignIssueDto.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\DTOs\\Issues\\AssignIssueDto.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\DTOs\\Issues\\AssignIssueDto.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\DTOs\\Issues\\AssignIssueDto.cs",
+              "RelativeToolTip": "FMAppApi\\DTOs\\Issues\\AssignIssueDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T10:58:34.433Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IssueRepository.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Repository\\DbLayer\\IssueRepository.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\Repository\\DbLayer\\IssueRepository.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Repository\\DbLayer\\IssueRepository.cs",
+              "RelativeToolTip": "FMAppApi\\Repository\\DbLayer\\IssueRepository.cs",
+              "ViewState": "AgIAAIcAAAAAAAAAAAAUwJgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T10:28:22.104Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "PagedResult.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\DTOs\\Common\\PagedResult.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\DTOs\\Common\\PagedResult.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\DTOs\\Common\\PagedResult.cs",
+              "RelativeToolTip": "FMAppApi\\DTOs\\Common\\PagedResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T07:23:48.346Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "IssueFilterDto.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\DTOs\\Issues\\IssueFilterDto.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\DTOs\\Issues\\IssueFilterDto.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\DTOs\\Issues\\IssueFilterDto.cs",
+              "RelativeToolTip": "FMAppApi\\DTOs\\Issues\\IssueFilterDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T07:20:08.388Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IssueHistory.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Entities\\IssueHistory.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\Entities\\IssueHistory.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Entities\\IssueHistory.cs",
+              "RelativeToolTip": "FMAppApi\\Entities\\IssueHistory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T05:35:26.319Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IssueFilterDto.cs",
+              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Entities\\IssueFilterDto.cs",
+              "RelativeDocumentMoniker": "FMAppApi\\Entities\\IssueFilterDto.cs",
+              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Entities\\IssueFilterDto.cs",
+              "RelativeToolTip": "FMAppApi\\Entities\\IssueFilterDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T07:18:35.322Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
               "Title": "IssueImage.cs",
               "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Entities\\IssueImage.cs",
               "RelativeDocumentMoniker": "FMAppApi\\Entities\\IssueImage.cs",
@@ -145,68 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Issue.cs",
-              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Entities\\Issue.cs",
-              "RelativeDocumentMoniker": "FMAppApi\\Entities\\Issue.cs",
-              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Entities\\Issue.cs",
-              "RelativeToolTip": "FMAppApi\\Entities\\Issue.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T10:18:33.106Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LoginController.cs",
-              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Controllers\\LoginController.cs",
-              "RelativeDocumentMoniker": "FMAppApi\\Controllers\\LoginController.cs",
-              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Controllers\\LoginController.cs",
-              "RelativeToolTip": "FMAppApi\\Controllers\\LoginController.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAQwEUAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-15T07:17:46.468Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "IssueHistory.cs",
-              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Entities\\IssueHistory.cs",
-              "RelativeDocumentMoniker": "FMAppApi\\Entities\\IssueHistory.cs",
-              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Entities\\IssueHistory.cs",
-              "RelativeToolTip": "FMAppApi\\Entities\\IssueHistory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-19T05:35:26.319Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Repository\\DbLayer\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "FMAppApi\\Repository\\DbLayer\\AppDbContext.cs",
-              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Repository\\DbLayer\\AppDbContext.cs",
-              "RelativeToolTip": "FMAppApi\\Repository\\DbLayer\\AppDbContext.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAcwB8AAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T11:33:29.959Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IssuesController.cs",
-              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Controllers\\IssuesController.cs",
-              "RelativeDocumentMoniker": "FMAppApi\\Controllers\\IssuesController.cs",
-              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Controllers\\IssuesController.cs",
-              "RelativeToolTip": "FMAppApi\\Controllers\\IssuesController.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAAAEQAAABUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T10:35:41.91Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 19,
               "Title": "ApproveIssueDto.cs",
               "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\DTOs\\Issues\\ApproveIssueDto.cs",
               "RelativeDocumentMoniker": "FMAppApi\\DTOs\\Issues\\ApproveIssueDto.cs",
@@ -215,30 +352,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-18T11:55:08.896Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "IUserRepository.cs",
-              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\Interfaces\\IUserRepository.cs",
-              "RelativeDocumentMoniker": "FMAppApi\\Interfaces\\IUserRepository.cs",
-              "ToolTip": "G:\\FMAppApi\\FMAppApi\\Interfaces\\IUserRepository.cs",
-              "RelativeToolTip": "FMAppApi\\Interfaces\\IUserRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T06:06:35.125Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "AssignIssueDto.cs",
-              "DocumentMoniker": "G:\\FMAppApi\\FMAppApi\\DTOs\\Issues\\AssignIssueDto.cs",
-              "RelativeDocumentMoniker": "FMAppApi\\DTOs\\Issues\\AssignIssueDto.cs",
-              "ToolTip": "G:\\FMAppApi\\FMAppApi\\DTOs\\Issues\\AssignIssueDto.cs",
-              "RelativeToolTip": "FMAppApi\\DTOs\\Issues\\AssignIssueDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T10:58:34.433Z"
             }
           ]
         },

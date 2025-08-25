@@ -18,3 +18,8 @@ wwwroot\Uploads\Issues\a9fd83f0-6950-4f0b-90ba-286f09c9e993.jpg
 wwwroot\Uploads\Issues\a3b72b32-f6ca-44b1-97c8-cf982c686c66.jpg
 wwwroot\Uploads\Issues\71e3129d-e083-42dd-bd02-a71ee6f26fb2.jpg
 wwwroot\Uploads\Issues\678037c2-ee69-4b77-b577-170b734a0910.jpg
+wwwroot\Uploads\Issues\1dc4e5b9-0624-45b8-bfc2-69b7e4a88c30_RecentIssue.PNG
+wwwroot\Uploads\Issues\b3d1ab61-e7f7-4465-9354-9a50c48a820c_RecentIssue.PNG
+wwwroot\Uploads\Issues\9939b3ed-177f-4fbe-ae60-6acd5a12536a_RecentIssue.PNG
+wwwroot\Uploads\Issues\306cd9c6-ea87-4a1e-a971-1fc99f91f3bf_ReportIssue.PNG
+wwwroot\Uploads\Issues\8a5f84ef-9cc2-4e90-84b4-b888c77589bd_button.PNG

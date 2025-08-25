@@ -7,7 +7,7 @@ public class CreateIssueDto
     public string? Description { get; set; }
     public string? Department { get; set; }
     public string? Priority { get; set; }
-
+    public int? AssignedToId { get; set; }
     // Support multiple file uploads
     public required List<IFormFile> Images { get; set; }
 }

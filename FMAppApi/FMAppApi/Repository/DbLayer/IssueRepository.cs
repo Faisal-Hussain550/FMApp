@@ -1,199 +1,162 @@
 ﻿using Dapper;
+using FMAppApi.Dtos.Common;
 using FMAppApi.Dtos.Issues;
 using FMAppApi.Entities;
-using FMAppApi.Interfaces;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using System.Data;
 
-namespace FMAppApi.Repository.DbLayer
+public class IssueRepository : IIssueRepository
 {
-    public class IssueRepository : IIssueRepository
-    {
-        private readonly IDbConnection _db;
-        private readonly IWebHostEnvironment _env;
+    private readonly IDbConnection _db;
 
-        public IssueRepository(IDbConnection db, IWebHostEnvironment env)
+    public IssueRepository(IDbConnection db)
+    {
+        _db = db;
+    }
+
+    // Create Issue and upload images
+    public async Task<Issue> CreateIssueAsync(CreateIssueDto dto, int userId)
+    {
+        if (_db.State == ConnectionState.Closed)
+            _db.Open(); // ✅ Make sure connection is open
+
+        // Insert Issue
+        var sql = @"
+            INSERT INTO Issues (Title, Description, Status, CreatedById, Department, Priority, AssignedToId, CreatedAt)
+            OUTPUT INSERTED.*
+            VALUES (@Title, @Description, 'Open', @CreatedById, @Department, @Priority, @AssignedToId, @CreatedAt)";
+
+        var issue = await _db.QuerySingleAsync<Issue>(sql, new
         {
-            _db = db;
-            _env = env;
+            dto.Title,
+            dto.Description,
+            CreatedById = userId,
+            dto.Department,
+            dto.Priority,
+            dto.AssignedToId,
+            CreatedAt = DateTime.UtcNow
+        });
+
+        // Upload images if any
+        if (dto.Images != null && dto.Images.Any())
+        {
+            await UploadIssueImagesAsync(issue.Issue_Id, dto.Images);
         }
 
-        // Employee creates issue
-        public async Task<Issue> CreateIssueAsync(CreateIssueDto dto, int userId)
+        return issue;
+    }
+
+    // Upload multiple images for an issue
+    public async Task UploadIssueImagesAsync(int issueId, List<IFormFile> files)
+    {
+        if (_db.State == ConnectionState.Closed)
+            _db.Open(); // ✅ Ensure connection is open
+
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", "Issues");
+        if (!Directory.Exists(uploadsFolder))
+            Directory.CreateDirectory(uploadsFolder);
+
+        foreach (var file in files)
         {
-            if (dto == null) throw new ArgumentNullException(nameof(dto));
+            if (file.Length == 0) continue;
 
-            var images = new List<IssueImage>();
+            var uniqueFileName = $"{Guid.NewGuid()}_{file.FileName}";
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            if (dto.Images != null && dto.Images.Any())
+            // Save file to server
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                // ✅ Safer way to build path
-                string uploadsFolder = Path.Combine(_env.WebRootPath, "Uploads", "Issues");
-                Directory.CreateDirectory(uploadsFolder);
-
-                foreach (var file in dto.Images)
-                {
-                    // Unique + safe filename
-                    string fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
-                    string filePath = Path.Combine(uploadsFolder, fileName);
-
-                    // Save file to disk
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-
-                    images.Add(new IssueImage
-                    {
-                        FilePath = $"/Uploads/Issues/{fileName}",   // ✅ URL-friendly path
-                        UploadedAt = DateTime.UtcNow
-                    });
-                }
+                await file.CopyToAsync(stream);
             }
 
-            // Insert issue and return Id
-            var sql = @"
-        INSERT INTO Issues (Title, Description, Department, Priority, CreatedById, Status, CreatedAt) 
-        VALUES (@Title, @Description, @Department, @Priority, @CreatedById, @Status, @CreatedAt);
-        SELECT CAST(SCOPE_IDENTITY() as int);";
+            // Insert record into IssueImage table
+            var sql = @"INSERT INTO IssueImage (FilePath, UploadedAt, IssueId)
+                        VALUES (@FilePath, @UploadedAt, @IssueId)";
 
-            var issueId = await _db.ExecuteScalarAsync<int>(sql, new
+            var rows = await _db.ExecuteAsync(sql, new
             {
-                dto.Title,
-                dto.Description,
-                dto.Department,
-                dto.Priority,
-                CreatedById = userId,
-                Status = "Pending",
-                CreatedAt = DateTime.UtcNow
-              
+                FilePath = $"/Uploads/Issues/{uniqueFileName}",
+                UploadedAt = DateTime.UtcNow,
+                IssueId = issueId
             });
 
-            // Insert history
-            await _db.ExecuteAsync(
-                "INSERT INTO IssueHistory (IssueId, Action, PerformedAt) VALUES (@IssueId, @Action, @PerformedAt)",
-                new {  IssueId = issueId, Action = "Issue created", PerformedAt = DateTime.UtcNow }
-            );
-
-            // Insert images in DB
-            foreach (var img in images)
-            {
-                await _db.ExecuteAsync(
-                    "INSERT INTO IssueImage (IssueId, FilePath, UploadedAt) VALUES (@IssueId, @FilePath, @UploadedAt)",
-                    new { IssueId = issueId, img.FilePath, img.UploadedAt }
-                );
-            }
-
-            return new Issue
-            {
-                Issue_Id = issueId,
-                Title = dto.Title,
-                Description = dto.Description,
-                Department = dto.Department,
-                Priority = dto.Priority,
-                CreatedById = userId,
-                Status = "Pending",
-                CreatedAt = DateTime.UtcNow,
-                Images = images
-            };
+            if (rows == 0)
+                throw new Exception("Failed to insert image record into IssueImage table");
         }
+    }
 
+    // Remaining repository methods...
+    public async Task AssignIssueAsync(AssignIssueDto dto)
+    {
+        var sql = "UPDATE Issues SET AssignedToId = @EmployeeId WHERE Issue_Id = @IssueId";
+        var rows = await _db.ExecuteAsync(sql, new { dto.EmployeeId, dto.IssueId });
+        if (rows == 0) throw new Exception("Issue not found");
+    }
 
-        // Supervisor assigns issue
-        public async Task AssignIssueAsync(AssignIssueDto dto)
+    public async Task ResolveIssueAsync(ResolveIssueDto dto, int userId)
+    {
+        var sql = "UPDATE Issues SET Status = 'Resolved' WHERE Issue_Id = @IssueId";
+        var rows = await _db.ExecuteAsync(sql, new { dto.IssueId });
+        if (rows == 0) throw new Exception("Issue not found");
+    }
+
+    public async Task ApproveIssueAsync(ApproveIssueDto dto)
+    {
+        var sql = "UPDATE Issues SET Status = 'Approved' WHERE Issue_Id = @IssueId";
+        var rows = await _db.ExecuteAsync(sql, new { dto.IssueId });
+        if (rows == 0) throw new Exception("Issue not found");
+    }
+
+    public async Task<PagedResult<Issue>> GetIssuesAsync(IssueFilterDto filter)
+    {
+        var baseSql = "SELECT * FROM Issues WHERE 1=1";
+        var countSql = "SELECT COUNT(*) FROM Issues WHERE 1=1";
+
+        var parameters = new DynamicParameters();
+
+        if (!string.IsNullOrEmpty(filter.Status))
         {
-            var sql = "UPDATE Issues SET AssignedToId = @EmployeeId, Status = 'Assigned' WHERE Issue_Id = @IssueId";
-            await _db.ExecuteAsync(sql, new { dto.IssueId, dto.EmployeeId });
-
-            await _db.ExecuteAsync(
-                "INSERT INTO IssueHistories (Issue_Id, Action, PerformedAt) VALUES (@IssueId, @Action, @PerformedAt)",
-                new { IssueId = dto.IssueId, Action = $"Assigned to Employee {dto.EmployeeId}", PerformedAt = DateTime.UtcNow }
-            );
+            baseSql += " AND Status = @Status";
+            countSql += " AND Status = @Status";
+            parameters.Add("Status", filter.Status);
         }
 
-        // Employee resolves issue
-        public async Task ResolveIssueAsync(ResolveIssueDto dto, int userId)
+        if (!string.IsNullOrEmpty(filter.Department))
         {
-            // Save resolution images
-            var images = new List<IssueImage>();
-            if (dto.ResolutionImages != null && dto.ResolutionImages.Any())
-            {
-                string uploadsFolder = Path.Combine(_env.WebRootPath, "uploads", "issues");
-                Directory.CreateDirectory(uploadsFolder);
-
-                foreach (var file in dto.ResolutionImages)
-                {
-                    string fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
-                    string filePath = Path.Combine(uploadsFolder, fileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-
-                    images.Add(new IssueImage
-                    {
-                        FilePath = $"/uploads/issues/{fileName}",
-                        UploadedAt = DateTime.UtcNow
-                    });
-                }
-            }
-
-            // Update issue status
-            await _db.ExecuteAsync("UPDATE Issues SET Status = 'Resolved' WHERE Issue_Id = @IssueId", new { dto.IssueId });
-
-            // Insert images into DB
-            foreach (var img in images)
-            {
-                await _db.ExecuteAsync(
-                    "INSERT INTO IssueImages (Issue_Id, FilePath, UploadedAt) VALUES (@IssueId, @FilePath, @UploadedAt)",
-                    new { IssueId = dto.IssueId, img.FilePath, img.UploadedAt }
-                );
-            }
-
-            // Insert history
-            await _db.ExecuteAsync(
-                "INSERT INTO IssueHistories (Issue_Id, Action, PerformedAt) VALUES (@IssueId, @Action, @PerformedAt)",
-                new { IssueId = dto.IssueId, Action = $"Resolved by Employee {userId}: {dto.ResolutionDescription}", PerformedAt = DateTime.UtcNow }
-            );
+            baseSql += " AND Department = @Department";
+            countSql += " AND Department = @Department";
+            parameters.Add("Department", filter.Department);
         }
 
-        // Supervisor approves issue
-        public async Task ApproveIssueAsync(ApproveIssueDto dto)
+        if (!string.IsNullOrEmpty(filter.Priority))
         {
-            await _db.ExecuteAsync("UPDATE Issues SET Status = 'Approved' WHERE Issue_Id = @IssueId", new { dto.IssueId });
-
-            await _db.ExecuteAsync(
-                "INSERT INTO IssueHistories (Issue_Id, Action, PerformedAt) VALUES (@IssueId, @Action, @PerformedAt)",
-                new { IssueId = dto.IssueId, Action = $"Approved by Supervisor {dto.ApprovedById}", PerformedAt = DateTime.UtcNow }
-            );
+            baseSql += " AND Priority = @Priority";
+            countSql += " AND Priority = @Priority";
+            parameters.Add("Priority", filter.Priority);
         }
 
-        // Get issues with optional filters
-        public async Task<IEnumerable<Issue>> GetIssuesAsync(IssueFilterDto filter)
+        if (filter.AssignedToId.HasValue)
         {
-            var sql = "SELECT * FROM Issues WHERE 1=1";
-            var parameters = new DynamicParameters();
-
-            if (!string.IsNullOrEmpty(filter.Status))
-            {
-                sql += " AND Status = @Status";
-                parameters.Add("Status", filter.Status);
-            }
-
-            if (!string.IsNullOrEmpty(filter.Department))
-            {
-                sql += " AND Department = @Department";
-                parameters.Add("Department", filter.Department);
-            }
-
-            if (!string.IsNullOrEmpty(filter.Priority))
-            {
-                sql += " AND Priority = @Priority";
-                parameters.Add("Priority", filter.Priority);
-            }
-
-            return await _db.QueryAsync<Issue>(sql, parameters);
+            baseSql += " AND AssignedToId = @AssignedToId";
+            countSql += " AND AssignedToId = @AssignedToId";
+            parameters.Add("AssignedToId", filter.AssignedToId);
         }
+
+        var totalCount = await _db.ExecuteScalarAsync<int>(countSql, parameters);
+
+        baseSql += " ORDER BY Issue_Id OFFSET @Skip ROWS FETCH NEXT @Take ROWS ONLY";
+        parameters.Add("Skip", (filter.Page - 1) * filter.PageSize);
+        parameters.Add("Take", filter.PageSize);
+
+        var items = await _db.QueryAsync<Issue>(baseSql, parameters);
+
+        return new PagedResult<Issue>
+        {
+            Items = items.ToList(),
+            TotalCount = totalCount,
+            TotalPages = (int)Math.Ceiling(totalCount / (double)filter.PageSize),
+            PageNumber = filter.Page,
+            PageSize = filter.PageSize
+        };
     }
 }

@@ -28,9 +28,23 @@ namespace FMAppApi.Repository.DbLayer
 
         public async Task<int> AddUserAsync(User user)
         {
-            var sql = @"INSERT INTO Users (Username, Password, Role, LastLogin, LastIp)
-                        VALUES (@Username, @Password, @Role, @LastLogin, @LastIp)";
+            var sql = @"INSERT INTO Users (Username, Password, Role, LastLogin, LastIp,Department)
+                        VALUES (@Username, @Password, @Role, @LastLogin, @LastIp,@Department)";
             return await _db.ExecuteAsync(sql, user);
         }
+        public async Task<bool> DeleteUserAsync(int id)
+        {
+            try
+            {
+                var sql = "DELETE FROM Users WHERE Id = @Id";
+                var affectedRows = await _db.ExecuteAsync(sql, new { Id = id });
+                return affectedRows > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }

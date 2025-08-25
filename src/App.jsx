@@ -20,34 +20,41 @@ import AdminSettings from "./components/Admin/Settings";
 import AdminUsers from "./components/Common/Users";
 import AdminRecentIssues from "./components/Common/RecentIssues";
 
+// Context Provider
+import { NotificationProvider } from "./components/Context/NotificationContext";
+
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        {/* Login */}
-        <Route path="/" element={<Login />} />
+    <NotificationProvider>
+      <Router>
+        <Routes>
+          {/* Login */}
+          <Route path="/" element={<Login />} />
 
-        {/* ================= ADMIN ================= */}
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<AdminDashboard />} />
-          <Route path="issues" element={<AdminIssues />} />
-          <Route path="report-issue" element={<AdminReportIssue />} />
-          <Route path="settings" element={<AdminSettings />} />
-          <Route path="users" element={<AdminUsers />} />
+          {/* ================= ADMIN ================= */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="issues" element={<AdminIssues />} />
+            <Route path="report-issue" element={<AdminReportIssue />} />
+            <Route path="settings" element={<AdminSettings />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="Recent Issues" element={<AdminRecentIssues />} />
+          </Route>
 
-          <Route path="Recent Issues" element={<AdminRecentIssues />} />
-        </Route>
+          {/* ================= MANAGER ================= */}
+          <Route path="/manager" element={<ManagerDashboard />} />
 
-        {/* ================= MANAGER ================= */}
-        <Route path="/manager/dashboard/*" element={<ManagerDashboard />} />
+          {/* ================= SUPERVISOR ================= */}
+          <Route
+            path="/supervisor/dashboard/*"
+            element={<SupervisorDashboard />}
+          />
 
-        {/* ================= SUPERVISOR ================= */}
-        <Route path="/supervisor/dashboard/*" element={<SupervisorDashboard />} />
-
-        {/* ================= EMPLOYEE ================= */}
-        <Route path="/employee/dashboard/*" element={<EmployeeDashboard />} />
-      </Routes>
-    </Router>
+          {/* ================= EMPLOYEE ================= */}
+          <Route path="/employee/dashboard/*" element={<EmployeeDashboard />} />
+        </Routes>
+      </Router>
+    </NotificationProvider>
   );
 };
 
