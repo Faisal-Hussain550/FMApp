@@ -12,5 +12,6 @@ public interface IIssueRepository
     Task ApproveIssueAsync(ApproveIssueDto dto);
     Task<PagedResult<Issue>> GetIssuesAsync(IssueFilterDto filter);
     Task UploadIssueImagesAsync(int issueId, List<IFormFile> files);
+    Task<List<Issue>> GetAllIssuesAsync();
 
 }
