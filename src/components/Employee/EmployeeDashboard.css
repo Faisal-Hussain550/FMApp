@@ -1,0 +1,146 @@
+.employee-dashboard {
+  padding: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
+}
+
+.dashboard-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  color: #1f2937;
+  text-align: center;
+}
+
+/* Empty state */
+.empty-text {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #6b7280;
+  padding: 4rem 0;
+}
+
+/* Issues grid */
+.issues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Issue Card */
+.issue-card {
+  background: #fff;
+  border-radius: 1rem;
+  border: 1px solid #e5e7eb;
+  padding: 1.8rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.issue-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.issue-card.completed {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.issue-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.issue-desc {
+  font-size: 1.1rem;
+  color: #374151;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.issue-meta {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-bottom: 0.8rem;
+}
+
+.issue-status {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.status-completed {
+  color: #16a34a;
+}
+
+.status-progress {
+  color: #f59e0b;
+}
+
+/* Remark & File */
+.remark-input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.6rem;
+  margin-bottom: 0.8rem;
+  resize: none;
+  font-size: 1rem;
+}
+
+.file-input {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* Button */
+.complete-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: #16a34a;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.complete-btn:hover {
+  background: #15803d;
+}
+
+/* Completed Info */
+.completed-info {
+  font-size: 1rem;
+  color: #374151;
+  margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-title {
+    font-size: 2rem;
+  }
+  .issue-title {
+    font-size: 1.25rem;
+  }
+  .issue-desc {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .employee-dashboard {
+    padding: 1rem;
+  }
+  .issues-grid {
+    gap: 1rem;
+  }
+}

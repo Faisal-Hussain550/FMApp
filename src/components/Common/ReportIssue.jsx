@@ -63,6 +63,11 @@ const handleSubmit = async (e) => {
     payload.append("Priority", formData.priority);
     payload.append("CreatedById", auth?.userId || 0);
 
+    // Directly use selectedManager
+    if (selectedManager) {
+      payload.append("AssignedDeptManger", selectedManager);
+    }
+
     images.forEach((file) => payload.append("Images", file));
 
     const res = await axios.post(
@@ -78,25 +83,15 @@ const handleSubmit = async (e) => {
 
     if (res.status === 200 || res.status === 201) {
       setMessage("✅ Issue reported successfully!");
-
-      // ✅ Send notification to selected manager
-      if (selectedManager) {
-        addNotification({
-          managerId: Number(selectedManager), // who should receive it
-          issueId: res.data?.id || null,      // backend issue id (if available)
-          title: formData.title,
-          description: formData.description,
-          admin: auth?.username || "Unknown", // who created it
-        });
-      }
-
-      // ✅ Reset form
-      setFormData({
-        title: "",
-        description: "",
-        department: "",
-        priority: "Medium",
+      addNotification({
+        managerId: Number(selectedManager),
+        issueId: res.data?.id || null,
+        title: formData.title,
+        description: formData.description,
+        admin: auth?.username || "Unknown",
       });
+
+      setFormData({ title: "", description: "", department: "", priority: "Medium" });
       setSelectedManager("");
       setImages([]);
     }
@@ -107,6 +102,7 @@ const handleSubmit = async (e) => {
     setLoading(false);
   }
 };
+
 
   return (
     <div className="report-page">

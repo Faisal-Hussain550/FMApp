@@ -1,192 +1,316 @@
-.manager-container {
-  padding: 2rem;
+/* 🌟 Manager Dashboard Styles */
+
+.manager-dashboard {
+  padding: 30px;
+  background: #f9fafb;
   min-height: 100vh;
-  background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .dashboard-title {
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 2rem;
-  color: #1f2937;
+  color: #1e293b;
+  margin-bottom: 25px;
+  text-align: center;
 }
 
+/* Summary Cards */
 .summary-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: 20px;
+  margin-bottom: 40px;
 }
 
-.summary-card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 1rem;
-  padding: 1.5rem;
+.card {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  transition: 0.2s;
+  gap: 15px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.summary-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
-.summary-card h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0;
-  color: #374151;
+.card-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #0f172a;
 }
 
-.summary-card p {
+.card-label {
   font-size: 0.9rem;
-  color: #6b7280;
-  margin: 0;
+  color: #64748b;
 }
 
-.icon.blue {
-  color: #2563eb;
-}
-.icon.yellow {
-  color: #ca8a04;
-}
-.icon.green {
-  color: #16a34a;
-}
-.icon.small {
-  margin-right: 0.25rem;
+/* Issues Section */
+.issues-section {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
-.notifications-wrapper {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.notifications-header {
+.issues-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
 }
 
-.clear-btn {
-  background: #ef4444;
-  color: #fff;
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
-  cursor: pointer;
+.issues-header h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.refresh-btn {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  transition: 0.2s;
-}
-.clear-btn:hover {
-  background: #dc2626;
+  gap: 8px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-.empty-state {
+.refresh-btn:hover {
+  background: #1d4ed8;
+}
+
+.no-issues {
   text-align: center;
-  padding: 2rem;
   color: #6b7280;
-  font-size: 1rem;
+  font-style: italic;
+  padding: 20px;
 }
 
-.notifications-grid {
+/* Issues Grid */
+.issues-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  gap: 22px;
 }
 
-.notification-card {
-  border-radius: 1rem;
-  padding: 1.5rem;
-  border: 1px solid #e5e7eb;
-  transition: 0.2s;
+/* Issue Card */
+.issue-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 18px;
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: all 0.2s ease;
+  flex-wrap: nowrap; /* Keep images on right */
+  gap: 15px; /* reduce space between details and image */
 }
 
-.notification-card.unread {
-  background: #eff6ff;
-  border-color: #bfdbfe;
-}
-.notification-card.read {
-  background: #f9fafb;
-  border-color: #e5e7eb;
+.issue-card:hover {
+  border-color: #2563eb;
+  background: #f1f5f9;
+  transform: translateY(-3px);
 }
 
-.notification-card h3 {
-  font-size: 1.rem;
-  font-weight: 700;
-  margin: 0;
-  color: #111827;
+.issue-details {
+  flex: 2; /* increase width of details */
+  margin-right: 10px;
+  min-width: 0; /* allow flex shrink */
 }
 
-.notification-card .desc {
-  font-size: 1.25rem;
-  color: #374151;
+.issue-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.issue-description {
+  font-size: 1rem;
+  color: #475569;
+  margin-bottom: 10px;
   line-height: 1.5;
 }
 
-.notification-card .meta {
-  font-size: 0.9rem;
-  color: #6b7280;
-}
-.notification-card .meta span {
-  font-weight: 500;
-  color: #374151;
+.issue-info {
+  font-size: 0.95rem;
+  color: #334155;
+  margin: 4px 0;
 }
 
-.assigned {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #16a34a;
+.issue-status {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.issue-status.resolved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.issue-status.pending {
+  background: #fef9c3;
+  color: #92400e;
+}
+
+.issue-status.in-progress {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* Assign Section */
+.assign-section {
+  margin-top: 14px;
   display: flex;
+  gap: 10px;
   align-items: center;
-  gap: 0.25rem;
 }
 
-.assign-select {
-  padding: 0.5rem;
-  font-size: 1.10rem;
-  border-radius: 0.5rem;
-  border: 1px solid #d1d5db;
+.assign-section select {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #0f172a;
+  background: white;
+  cursor: pointer;
+  transition: border 0.2s ease;
 }
 
-.mark-read-btn {
-  align-self: flex-start;
-  background: #22c55e;
+.assign-section select:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+.assign-btn {
+  padding: 8px 14px;
+  background: #16a34a;
   color: white;
   border: none;
-  border-radius: 0.5rem;
-  padding: 0.4rem 1rem;
-  font-size: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: 0.2s;
+  transition: background 0.2s ease;
 }
-.mark-read-btn:hover {
-  background: #16a34a;
+
+.assign-btn:hover {
+  background: #15803d;
 }
+
+.assign-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.issue-id {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+/* Right Side Images */
+.issue-images-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0; /* Prevent shrinking */
+  width: 35%; /* increase image container width */
+}
+
+.issue-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.issue-image:hover {
+  transform: scale(1.05);
+}
+
+/* Fullscreen Image Preview */
+.image-preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: zoom-in;
+}
+
+.image-preview-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
-  .dashboard-title { font-size: 2.2rem; }
+  .issue-card {
+    flex-direction: row; 
+  }
+  .issue-details {
+    flex: 2.5; /* bigger details */
+    margin-right: 10px;
+  }
+  .issue-images-right {
+    width: 30%; 
+  }
+  .issue-image {
+    height: 120px;
+  }
 }
-@media (max-width: 768px) {
-  .dashboard-title { font-size: 2rem; }
-  .notifications { padding: 2rem; }
-  .notif-title { font-size: 1.25rem; }
+
+@media (max-width: 640px) {
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+  .issue-card {
+    flex-direction: row; 
+  }
+  .issue-details {
+    flex: 2; 
+    margin-right: 8px;
+  }
+  .issue-images-right {
+    width: 35%; 
+  }
+  .issue-image {
+    height: 100px;
+  }
 }
-@media (max-width: 480px) {
-  .manager-home { padding: 1.2rem; }
-  .summary-cards { gap: 1rem; }
-  .notifications { padding: 1.2rem; }
-  .notif-desc { font-size: 1rem; }
+.assigned-message {
+  padding: 8px 12px;
+  background-color: #16a34a; /* green */
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  display: inline-block;
+  font-size: 0.9rem;
+  text-align: center;
 }

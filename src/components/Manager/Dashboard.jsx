@@ -1,36 +1,29 @@
-// src/components/Manager/ManagerDashboard.jsx
 import React from "react";
-import { useNotification } from "../Context/NotificationContext";
+import ManagerHome from "./ManagerHome";
+import { useAuth } from "../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
+
+
 
 const ManagerDashboard = () => {
-  const { notifications } = useNotification();
+  const { auth, logout } = useAuth();
+  const navigate = useNavigate();
+
+  // Redirect if not Manager
+  React.useEffect(() => {
+    if (!auth.isAuthenticated || auth.role !== "Manager") {
+      navigate("/");
+    }
+  }, [auth, navigate]);
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Manager Dashboard</h1>
-
-      <div className="bg-white shadow rounded-lg p-4">
-        <h2 className="text-xl font-semibold mb-3">Notifications</h2>
-
-        {notifications.length === 0 ? (
-          <p className="text-gray-500">No notifications yet.</p>
-        ) : (
-          <ul className="space-y-2">
-            {notifications.map((notif, index) => (
-              <li
-                key={index}
-                className="border border-gray-200 rounded-lg p-3 bg-gray-50"
-              >
-                <p className="font-medium">{notif.title}</p>
-                <p className="text-sm text-gray-600">{notif.description}</p>
-                <p className="text-xs text-gray-500">
-                  Tagged by Admin: <span className="font-semibold">{notif.admin}</span>
-                </p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+    <div className="flex h-screen">
+   
+      <main className="flex-1 p-6 bg-gray-100 overflow-auto">
+        <ManagerHome />
+     
+      </main>
+        
     </div>
   );
 };

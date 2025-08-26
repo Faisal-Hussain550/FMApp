@@ -51,7 +51,7 @@ const App = () => {
           />
 
           {/* ================= EMPLOYEE ================= */}
-          <Route path="/employee/dashboard/*" element={<EmployeeDashboard />} />
+          <Route path="/employee" element={<EmployeeDashboard />} />
         </Routes>
       </Router>
     </NotificationProvider>

@@ -160,12 +160,12 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  {password &&
+                  {/* {password &&
                     (showPassword ? (
                       <FaEyeSlash onClick={() => setShowPassword(false)} />
                     ) : (
                       <FaEye onClick={() => setShowPassword(true)} />
-                    ))}
+                    ))} */}
                 </div>
 
                 <div className="login-center-buttons">
